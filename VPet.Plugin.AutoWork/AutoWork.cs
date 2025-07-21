@@ -8,6 +8,7 @@
 
 
 using System.Windows.Threading;
+using LinePutScript.Localization.WPF;
 using VPet_Simulator.Core;
 using VPet_Simulator.Windows.Interface;
 
@@ -68,10 +69,10 @@ public class AutoWork : MainPlugin
                     // Attempt to start the work.
                     if (MW.Main.StartWork(MW.Main.NowWork))
                         // Announce successful start.
-                        MW.Main.SayRnd($"已自動開始新的{MW.Main.NowWork.NameTrans}…");
+                        MW.Main.SayRnd("已自動開始新的「{0}」…".Translate(MW.Main.NowWork.NameTrans));
                     else
                         // Announce failure to start.
-                        MW.Main.SayRnd($"無法自動開始新的{MW.Main.NowWork.NameTrans}…");
+                        MW.Main.SayRnd("無法自動開始新的「{0}」…".Translate(MW.Main.NowWork.NameTrans));
                 }
 
                 // Reset the idle timer to prevent repeated attempts.
