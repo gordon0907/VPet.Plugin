@@ -60,10 +60,10 @@ public class AutoWork : MainPlugin
                 // If busy, reset the counter.
                 idleTimeInSeconds = 0;
 
-            // Check if the idle time has exceeded the threshold.
-            if (idleTimeInSeconds > IdleThresholdInSeconds)
+            // Triggers once when the idle threshold is met.
+            if (idleTimeInSeconds == IdleThresholdInSeconds + 1)
             {
-                // Ensure a work task is selected.
+                // Ensure a work task is set (it can be null on a fresh game start).
                 if (MW.Main.NowWork != null)
                 {
                     // Attempt to start the work.
@@ -74,9 +74,6 @@ public class AutoWork : MainPlugin
                         // Announce failure to start.
                         MW.Main.SayRnd("無法自動開始新的「{0}」…".Translate(MW.Main.NowWork.NameTrans));
                 }
-
-                // Reset the idle timer to prevent repeated attempts.
-                idleTimeInSeconds = 0;
             }
         };
 
