@@ -78,6 +78,15 @@ public class AutoWork : MainPlugin
                 // Reset the idle timer to prevent repeated attempts.
                 idleTimeInSeconds = 0;
             }
+
+            // If the pet remains idle for an extended period, put it to sleep.
+            if (idleTimeInSeconds > IdleThresholdInSeconds * 2)
+            {
+                // Announce that the pet is going to sleep.
+                MW.Main.SayRnd("好無聊呀，我先去睡一會兒啦～".Translate());
+                // Put the pet to sleep.
+                MW.Main.DisplaySleep(true);
+            }
         };
 
         // Start the timer.
