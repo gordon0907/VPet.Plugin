@@ -39,8 +39,8 @@ public class AutoWork : MainPlugin
     /// </summary>
     public override void GameLoaded()
     {
-        // Tracks the pet's idle time in seconds.
-        int idleTimeInSeconds = 0;
+        // Counts the elapsed seconds of the pet's current idle period.
+        int elapsedIdleSeconds = -1;
 
         // Initialize the timer.
         var autoWorkTimer = new DispatcherTimer
@@ -55,13 +55,13 @@ public class AutoWork : MainPlugin
             // Check if the pet is currently idle.
             if (MW.Main.State == Main.WorkingState.Nomal)
                 // If idle, increment the counter.
-                idleTimeInSeconds++;
+                elapsedIdleSeconds++;
             else
                 // If busy, reset the counter.
-                idleTimeInSeconds = 0;
+                elapsedIdleSeconds = -1;
 
             // Triggers once when the idle threshold is met.
-            if (idleTimeInSeconds == IdleThresholdInSeconds + 1)
+            if (elapsedIdleSeconds == IdleThresholdInSeconds)
             {
                 // Ensure a work task is set (it can be null on a fresh game start).
                 if (MW.Main.NowWork != null)
